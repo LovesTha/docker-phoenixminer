@@ -1,6 +1,6 @@
 ARG BASE
 
-FROM ubuntu:${BASE:-20.04}
+FROM nvidia/cuda:11.0-base
 
 # Install default apps
 RUN export DEBIAN_FRONTEND=noninteractive; \
