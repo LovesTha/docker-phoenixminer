@@ -1,7 +1,6 @@
 ARG BASE
 
-FROM nvidia/cuda:11.0-base
-
+FROM nvidia/cuda:11.4.2-devel-ubuntu20.04
 # Install default apps
 RUN export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
@@ -44,7 +43,7 @@ ENV DRIVERV="20.20"
 ENV PATH=$PATH:/home/docker/phoenixminer
 ENV HOME="/home/docker"
 ENV POOL="ssl://asia-eth.2miners.com:12020"
-ENV WALLET="0xe037C6245910EbBbA720514835d31B385D76927f"
+ENV WALLET="0x1601e820d963f3ed91cd0dab94191c188dddf32c"
 ENV PASSWORD="x"
 ENV TT="-80"
 ENV TSTOP="85"
@@ -57,4 +56,6 @@ ENV NVIDIA_BUILD_OPTS="-a -N -q --install-libglvnd --ui=none --no-kernel-module"
 WORKDIR /home/docker/
 
 # Define default command.
-CMD ["./start.sh"]
+#CMD ["./start.sh"]
+#CMD nvidia-smi
+CMD cat /usr/local/cuda/version.txt; nvcc --version; nvidia-smi; sudo /home/docker/phoenixminer/PhoenixMiner -mi 1 -gpow 94  -pool eth.2miners.com:2020 -wal 0x1601e820d963f3ed91cd0dab94191c188dddf32c -worker Phoenix -epsw x -mode 1 -Rmode 1 -log 0 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -tstop 89 -tstart 79 -coin eth
